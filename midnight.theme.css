@@ -1,0 +1,149 @@
+/*
+ * forked from https://github.com/refact0r/midnight-discord
+ * edited by isaiah76
+*/
+
+/* import theme modules */
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+
+body {
+    /* font, change to '' for default discord font */
+    --font: 'figtree';
+
+    /* sizes */
+    --gap: 12px; /* spacing between panels */
+    --divider-thickness: 4px; /* thickness of unread messages divider and highlighted message borders */
+
+    /* animation/transition options */
+    --animations: on; /* turn off to disable all midnight animations/transitions */
+    --list-item-transition: 0.2s ease; /* transition for list items */
+    --dms-icon-svg-transition: 0.4s ease; /* transition for the dms icon */
+
+    /* top bar options */
+    --move-top-bar-buttons: off; /* turn on to move inbox button to the server list (recommend setting top bar height to 24px) */
+    --custom-app-top-bar-height: 32px; /* height of the titlebar/top bar (default is 36px)*/
+
+    /* window controls */
+    --custom-window-controls: off; /* turn off to use discord default window controls */
+    --window-control-size: 14px; /* size of custom window controls */
+
+    /* dms button icon options */
+    --dms-icon: on; /* set to default to use discord icon, on to use custom icon, off to disable completely */
+    --dms-icon-svg-url: url('https://upload.wikimedia.org/wikipedia/commons/c/c4/Font_Awesome_5_solid_moon.svg'); /* icon svg url. MUST BE A SVG. */
+    --dms-icon-svg-size: 90%; /* size of the svg (css mask-size) */
+    --dms-icon-color-before: var(--icon-secondary); /* normal icon color */
+    --dms-icon-color-after: var(--white); /* icon color when button is hovered/selected */
+
+    /* dms button background options */
+    --dms-background: off; /* off to disable, image to use a background image, color to use a custom color/gradient */
+    --dms-background-image-url: url(''); /* url of the background image */
+    --dms-background-image-size: cover; /* size of the background image (css background-size) */
+    --dms-background-color: linear-gradient(70deg, var(--blue-2), var(--purple-2), var(--red-2)); /* fixed color/gradient (css background) */
+
+    /* background image options */
+    --background-image: off; /* turn on to use a background image */
+    --background-image-url: url(''); /* url of the background image */
+
+    /* transparency/blur options */
+    /* NOTE: TO USE TRANSPARENCY/BLUR, YOU MUST HAVE TRANSPARENT BG COLORS. FOR EXAMPLE: --bg-4: hsla(220, 15%, 10%, 0.7); */
+    --transparency-tweaks: off; /* turn on to remove some elements for better transparency */
+    --remove-bg-layer: off; /* turn on to remove the base --bg-3 layer for use with window transparency (WILL OVERRIDE BACKGROUND IMAGE) */
+    --panel-blur: off; /* turn on to blur the background of panels */
+    --blur-amount: 12px; /* amount of blur */
+    --bg-floating: var(--bg-3); /* you can set this to a more opaque color if floating panels look too transparent */
+
+    /* chatbar options */
+    --flipped-chatbar: on; /* turn on to move the typing indicator above the chatbar */
+    --chatbar-height: 47px; /* height of the chatbar (52px by default, 47px to align it with the user panel) */
+    --chatbar-padding: 8px; /* padding of the chatbar */
+
+    /* other options */
+    --small-user-panel: off; /* turn on to make the user panel smaller like in old discord */
+}
+
+/* color options */
+:root {
+    --colors: on; /* turn off to use Discord default colors */
+    
+    /* Text Colors */
+    --text-0: hsl(0, 0%, 95%); /* text on colored elements (bright white) */
+    --text-1: hsl(0, 0%, 95%); /* primary white text */
+    --text-2: hsl(220, 15%, 95%); /* headings and important text */
+    --text-3: hsl(220, 10%, 95%); /* normal text */
+    --text-4: hsl(220, 8%, 85%); /* icon buttons and channels */
+    --text-5: hsl(220, 6%, 40%); /* muted channels/chats and timestamps */
+    
+    /* Background & Dark Colors (True Black AMOLED) */
+    --bg-1: hsl(0, 0%, 6%); /* dark buttons when clicked */
+    --bg-2: hsl(0, 0%, 5%); /* dark buttons */
+    --bg-3: hsl(0, 0%, 0%); /* spacing, secondary elements */
+    --bg-4: hsl(0, 0%, 0%); /* pure black background */
+    
+    /* Interaction States */
+    --hover: hsla(0, 0%, 100%, 0.08); /* hover effect */
+    --active: hsla(0, 0%, 100%, 0.15); /* clicked/selected */
+    --active-2: hsla(0, 0%, 100%, 0.2); /* extra state for buttons */
+    --message-hover: hsla(0, 0%, 100%, 0.05); /* message hover */
+    
+    /* Accent Colors (Vibrant for AMOLED) */
+    --accent-1: hsl(0, 0%, 100%); /* links & accent text */
+    --accent-2: hsla(0, 0%, 20%); /* small accent elements */
+    --accent-3: hsla(0, 0%, 3%); /* accent buttons */
+    --accent-4: hsla(0, 0%, 8%); /* accent hover */
+    --accent-5: oklch(45% 0.2 215); /* accent clicked */
+    --accent-new: var(--accent-2); /* mute/deafen buttons */
+    
+    /* Mentions & Replies */
+    --mention: linear-gradient(to right, hsla(0, 0%, 100%, 0.08) 40%, transparent);
+    --mention-hover: linear-gradient(to right, hsla(0, 0%, 100%, 0.2) 40%, transparent);
+    --reply: linear-gradient(to right, hsla(0, 0%, 100%, 0.05) 40%, transparent);
+    --reply-hover: linear-gradient(to right, hsla(0, 0%, 100%, 0.08) 40%, transparent);
+    
+    /* Status Indicators (Bright for AMOLED) */
+    --online: #00FF00; /* vibrant green */
+    --dnd: #FF0000; /* pure red */
+    --idle: #FFFF00; /* pure yellow */
+    --streaming: #9146FF; /* Twitch purple */
+    --offline: hsl(0, 0%, 50%); /* gray for offline */
+    
+    /* Borders */
+    --border-light: hsla(0, 0%, 100%, 0.1); /* subtle borders */
+    --border: hsla(0, 0%, 100%, 0.15); /* normal borders */
+    --button-border: hsla(0, 0%, 100%, 0.2); /* button borders */
+    
+    /* Base Colors (Vibrant for AMOLED) */
+    --red-1: oklch(85% 0.2 0);
+    --red-2: oklch(75% 0.2 0);
+    --red-3: oklch(65% 0.2 0);
+    --red-4: oklch(55% 0.2 0);
+    --red-5: oklch(45% 0.2 0);
+    
+    --green-1: oklch(85% 0.2 170);
+    --green-2: oklch(75% 0.2 170);
+    --green-3: oklch(65% 0.2 170);
+    --green-4: oklch(55% 0.2 170);
+    --green-5: oklch(45% 0.2 160);
+    
+    --blue-1: oklch(85% 0.2 215);
+    --blue-2: oklch(75% 0.2 215);
+    --blue-3: oklch(65% 0.2 215);
+    --blue-4: oklch(55% 0.2 215);
+    --blue-5: oklch(45% 0.2 215);
+    
+    --yellow-1: oklch(85% 0.2 90);
+    --yellow-2: oklch(75% 0.2 90);
+    --yellow-3: oklch(65% 0.2 90);
+    --yellow-4: oklch(55% 0.2 90);
+    --yellow-5: oklch(45% 0.2 90);
+    
+    --purple-1: oklch(85% 0.2 310);
+    --purple-2: oklch(75% 0.2 310);
+    --purple-3: oklch(65% 0.2 310);
+    --purple-4: oklch(55% 0.2 310);
+    --purple-5: oklch(45% 0.2 310);
+
+  /* Background color for text selection */
+  ::selection {
+    background-color: hsla(0, 0%, 100%, 20%);
+  }
+}
